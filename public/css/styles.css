@@ -1,0 +1,81 @@
+.nav-hover:hover {
+  background-color: #d92228;
+  border-radius: 3px;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  color: #fff;
+  background-color: #d92228;
+}
+
+.active {
+  background-color: #d92228;
+  border-radius: 3px;
+}
+
+.modal-backdrop {
+  background-color: transparent;
+}
+.modal-dialog {
+  position: fixed;
+  right: 20px;
+  bottom: 105px;
+  width: 300px;
+  margin: 0;
+}
+.modal-body {
+  height: 300px;
+  overflow: scroll;
+}
+
+.controls {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  opacity: 0.5;
+}
+
+.controls:hover {
+  opacity: 1;
+}
+
+.brand-button {
+  background-color: #d92228;
+  border: none;
+}
+
+.brand-button:hover {
+  background-color: #343a40;
+}
+
+.footer-layout {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.footer-layout-content {
+  flex: 1;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  .mobile-dropdown-padding {
+    padding-left: 20px !important;
+  }
+  .mobile-dropdown-margin {
+    margin-top: 5px !important;
+    margin-right: 0 !important;
+    border-radius: 0 !important;
+  }
+  .active {
+    border-radius: 0 !important;
+  }
+  .nav-hover:hover {
+    border-radius: 0 !important;
+  }
+}
