@@ -1,4 +1,4 @@
-import { useReducer, Fragment } from "react";
+import { useReducer, Fragment, useEffect } from "react";
 import axios from "axios";
 import {
   Alert,
@@ -13,6 +13,7 @@ import {
   CardFooter,
   CardHeader,
 } from "reactstrap";
+import { useRouter } from "next/router";
 import LocalPreview from "../Video/LocalPreview";
 
 const TYPES = ["sms", "email"];
@@ -29,6 +30,9 @@ const INITIAL_STATE = {
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "UPDATE_FORM_INITIAL":
+      const { payload } = action;
+      return { ...state, ...payload };
     case "UPDATE_FORM":
       const { name, value } = action.payload;
       return { ...state, [name]: value, error: "", success: "" };
@@ -42,9 +46,26 @@ const reducer = (state, action) => {
 };
 
 const Invite = () => {
+  const router = useRouter();
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
   const { room, name, type, number, email, error, success } = state;
+
+  useEffect(() => {
+    const { query } = router;
+    if (query) {
+      dispatch({
+        type: "UPDATE_FORM_INITIAL",
+        payload: {
+          ...(query.room && { room: query.room }),
+          ...(query.name && { name: query.name }),
+          ...(query.type && { type: query.type }),
+          ...(query.email && { email: query.email }),
+          ...(query.number && { number: query.number }),
+        },
+      });
+    }
+  }, [router]);
 
   const saveToState = ({ target: { name, value } }) => {
     dispatch({ type: "UPDATE_FORM", payload: { name, value } });
